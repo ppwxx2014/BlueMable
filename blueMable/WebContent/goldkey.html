@@ -8,34 +8,29 @@
 <body>
 
 <script>
-	let goldKeyArr = new Array();
-	for(let i = 0; i < 30; i++) {
-		goldKeyArr[i] = i;
-		console.log(goldKeyArr[i]); // 0~29
-	}
-	function shuffle(goldKeyArr) { 
-		var j, x, i; 
-		for (i = a.length; i; i -= 1) { 
-			j = Math.floor(Math.random() * i); 
-			x = a[i - 1]; 
-			a[i - 1] = a[j]; 
-			a[j] = x; 
-		} 
-	}
-
-	
-	
-
-
-	/* function buildingRepairCosts() {
-		/* 
-		let hotelCount = 0;
-		let buildigCount = 0;
-		let villaCount = 0; 
-		플레이어 
-		*/
-		
-		
+let goldKey = {
+   		1 : function() {
+   			//병원비 지급 : 벌금 50000원
+   			let imageId = 1;
+   			subMoney(playerToken, 50000)
+   			
+   		},
+    	2 : function() {
+    		
+    	},
+   		//.....
+   		30 : function() {
+   			//
+   		}
+    	11 : function(player) {
+    		this.location = 1;
+    	}
+    }
 </script>
 </body>
 </html>
+
+
+
+
+

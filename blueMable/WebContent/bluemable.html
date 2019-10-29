@@ -26,47 +26,6 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
 <!-- Latest compiled JavaScript -->
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-<script>
-	window.addEventListener("load", function(){
-        let beforePoint = 1; // 주사위 돌리기 전에 있던 위치
-        let afterPoint = 1; // 주사위 돌리고 난 후 위치
-        
-        let play = document.querySelector("#throwDice");
-        play.addEventListener("click", function() {
-        	$("#startDice").hide();
-        	
-        	let diceOne = 0;
-    		let diceTwo = 0;
-    		let diceNum = 0; // 주사위 두개 던져서 두개 합
-    		let turn = false;
-    		
-   			diceOne =  Math.floor( (Math.random() * 6) + 1 );
-   			diceTwo =  Math.floor( (Math.random() * 6) + 1 );
-   			diceNum = Number(diceOne) + Number(diceTwo);
-   			console.log(diceOne);
-   			console.log(diceTwo);
-   			console.log("diceNum : " + diceNum );
-	
-            document.querySelector("#dice").value = diceNum;
-            $("#dice").text(diceNum);
-            if(beforePoint+diceNum <= 40) {
-                afterPoint = beforePoint + diceNum;
-            } else {
-                afterPoint = beforePoint + diceNum - 40;
-            }
-            document.querySelector("#point").value = afterPoint;
-            // 말을 이동시킵니다.
-            let afterId = "#b" + afterPoint;
-            document.querySelector(afterId).innerHTML
-                = '<button class="btn-danger">♠</button>';
-
-            let beforeId = "#b" + beforePoint;
-            document.querySelector(beforeId).innerHTML = "";
-
-            beforePoint = afterPoint;
-        });
-    });
-</script>
 </head>
 <body>
    <div class="boaard_floor">
@@ -335,4 +294,249 @@
       </div>
    </div>
 </body>
+
+<script>
+	window.addEventListener("load", function(){
+        let beforePoint = 1; // 주사위 돌리기 전에 있던 위치
+        let afterPoint = 1; // 주사위 돌리고 난 후 위치
+        
+        let play = document.querySelector("#throwDice");
+        play.addEventListener("click", function() {
+        	$("#startDice").hide();
+        	
+        	let diceOne = 0;
+    		let diceTwo = 0;
+    		let diceNum = 0; // 주사위 두개 던져서 두개 합
+    		let turn = false;
+    		
+   			diceOne =  Math.floor( (Math.random() * 6) + 1 );
+   			diceTwo =  Math.floor( (Math.random() * 6) + 1 );
+   			diceNum = Number(diceOne) + Number(diceTwo);
+   			console.log(diceOne);
+   			console.log(diceTwo);
+   			console.log("diceNum : " + diceNum );
+	
+            document.querySelector("#dice").value = diceNum;
+            $("#dice").text(diceNum);
+            if(beforePoint+diceNum <= 40) {
+                afterPoint = beforePoint + diceNum;
+            } else {
+                afterPoint = beforePoint + diceNum - 40;
+            }
+            document.querySelector("#point").value = afterPoint;
+            // 말을 이동시킵니다.
+            let afterId = "#b" + afterPoint;
+            document.querySelector(afterId).innerHTML
+                = '<button class="btn-danger">♠</button>';
+
+            let beforeId = "#b" + beforePoint;
+            document.querySelector(beforeId).innerHTML = "";
+
+            beforePoint = afterPoint;
+        });
+    });
+	
+	var totalPlayer = 4; // 게임할 플레이어 수
+    var playerToken = 1; // 턴 확인
+    var Welfare = 0 // 복지기금
+    
+	function Players() {
+        this.money = 2930000; // 플레이어 자금
+        this.location = 0; // 플레이어 위치
+        this.isLoans = false; // 대출 여부
+        this.LoansValues = 0; // 대출금(rush&cash)
+        this.muindo = 0; // 무인도일 경우 
+        this.inventory = "none"; // 사용할수있는 황금카드 소유여부 = 미보유 :(none)  우대(exemp), 무인도탈출(escape
+    	
+	};
+	
+    /*
+    let player = {
+        1:{
+			money : 2930000,// 플레이어 자금
+			location : 0, //플레이어 위치
+			isLoans : false, //대출 여부
+			inventory : "none" //사용할수있는 황금카드 소유여부 = 미보유 :(none)  우대(exemp), 무인도탈출(escape)
+		},
+        2:{
+			money : 2930000,// 플레이어 자금
+			location : 0, //플레이어 위치
+			isLoans : false, //대출 여부
+			inventory : "none" //사용할수있는 황금카드 소유여부 = 미보유 :(none)  우대(exemp), 무인도탈출(escape)
+		},
+        3:{
+			money : 2930000,// 플레이어 자금
+			location : 0, //플레이어 위치
+			isLoans : false, //대출 여부
+			inventory : "none" //사용할수있는 황금카드 소유여부 = 미보유 :(none)  우대(exemp), 무인도탈출(escape)
+		},
+        4:{
+			money : 2930000,// 플레이어 자금
+			location : 0, //플레이어 위치
+			isLoans : false, //대출 여부
+			inventory : "none" //사용할수있는 황금카드 소유여부 = 미보유 :(none)  우대(exemp), 무인도탈출(escape)
+		}
+        for(i=1;i<=4;i++){
+             :{
+			money : 2930000,// 플레이어 자금
+			location : 0, //플레이어 위치
+			isLoans : false, //대출 여부
+			inventory : "none" //사용할수있는 황금카드 소유여부 = 미보유 :(none)  우대(exemp), 무인도탈출(escape)
+		    },
+        }
+    };
+    */
+	
+    var player = new Array();
+    for(i=1 ; i<=totalPlayer ; i++){ //플레이어 객체생성
+        player[i] = new Players();
+    }
+    
+	let movePlayer = function(token, diceNum){ //플레이어 이동을 위한함수
+        let moveCoord = player[token].location;
+		if(player[token].muindo==0){
+            moveCoord += diceNum;
+            if(moveCoord>40){
+			    moveCoord-=40;
+		    }
+        }
+		
+        player[token].location = moveCoord;
+	};
+	
+    var changeTurn = function(isNext){//턴변경해준다
+        if(isNext){
+            playerToken++;
+        }
+        if(playerToken>totalPlayer){
+            playerToken-=totalPlayer;
+        }
+    };
+	let map = [ 
+		//각 칸에 실행될 함수 이름 저장
+        //칸 이동후 해당
+	];
+	var addMoney = function(token, money){//돈 추가 함수
+        player[token].money+=money;
+    }
+    
+    var subMoney = function(token, money){//돈 소비 함수 token:playerToken money
+        player[token].money+=money;
+    }
+    
+    /*
+	    땅 소유자
+	    땅 가격
+	    각 건물가격
+	    건물 여부
+    */
+    
+	function Taipei(){
+    	const TAIPEI = 50000; //땅 가격
+    	const HOTEL = 250000; //땅의 호텔 가격
+    	const BUILDING = 150000; //땅의 빌딩 가격
+    	const VILLA1 = 50000; //땅의 빌라 가격
+    	const VILLA2 = 50000; //땅의 빌라 가격
+    	//let owner = 0; //소유한 플레이어 외부정의 해야함
+    	let fee = 4000; //통행료
+    	let isHotel = false;
+    	let isBuliding = false;
+    	let isVilla1 = false;
+    	let isVilla2 = false;
+    	if(isHotel || isBuliding || isVilla1 || isVilla2)
+    		fee=0;
+    	if(isHotel)
+    		fee+=HOTEL;
+    	if(isBuliding)
+    		fee+=BUILDING;
+    	if(isVilla1)
+    		fee+=VILLA1;
+    	if(isVilla2)
+    		fee+=VILLA2;
+    	return fee;
+    	//addMoney((소유자), fee);
+    	//subMoney(totalPlayer, fee);
+    }
+  
+    //황금카드 함수 30개
+    let goldKey = {
+   		1 : function(playerToken) {
+   			//병원비 지급 : 벌금 50000원
+   			let imageId = 1;
+   			subMoney(playerToken, 50000)
+   			
+   		},
+    	2 : function() {
+    		
+    	},
+    	7 : function(playerToken) {
+    		// 은행에 5만원을 납부합니다.
+    		subMoney(playerToken, 50000);
+    	},
+    	/* 10 : function(playerToken) {
+    		// 뒤로 3칸
+    		if(player.[playerToken].location == 3) {
+    			player.[playerToken].location = 40;
+    		} else {
+    			movePlayer(playerToken, -3);
+    		}
+    		
+    	}, */
+    	11 : function(playerToken) {
+    		// 출발지로 돌아가고, 월급을 받습니다.
+    		player[token].location = 1;
+    		addMoney(token, 200000);
+    	},
+    	22 : function(playerToken) {
+    		// 30만원을 은행에서 받습니다.
+    		addMoney(token, 300000);
+    	},
+   		30 : function() {
+   			//
+   		}
+    	
+    }
+    
+    //카드 섞는다
+    
+	let goldKeyList =[1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29] // 29
+	function shuffle(goldKeyList){
+		console.log(goldKeyList.length);
+		for(let j, x, i = goldKeyList.length; i; j = Math.floor(Math.random() * i), x = goldKeyList[--i], goldKeyList[i] = goldKeyList[j], goldKeyList[j] = x);
+		return goldKeyList;
+	};
+	let shuffleArr = shuffle(goldKeyList);
+	console.log(shuffleArr)
+
+    function drowKey(){// 카드 뽑을때
+    	var cardIndex = 0;
+    	goldKey[goldKeyList[cardIndex]];
+    	cardIndex++;
+    }
+	let showDisplay = function(){//표시갱신
+		$("#1p").html(player[1].location);//각 플레이어 위치 표시
+        $("#2p").html(player[2].location);
+        $("#3p").html(player[3].location);
+        $("#4p").html(player[4].location);
+        
+		$("#1Pmoney").html(player[1].money);//각 플레이어 돈 표시
+        $("#2Pmoney").html(player[2].money);
+        $("#3Pmoney").html(player[3].money);
+        $("#4Pmoney").html(player[4].money);
+        
+        $("#turn").html(playerToken);//차례표시
+        
+        //복지기금 표시
+	};
+    
+	$(document).ready(function(){
+        showDisplay();
+        $("#throwDice").click(function(){
+            movePlayer(playerToken, 3);
+            //map[player1.location];
+            showDisplay();
+            changeTurn(true);
+        }); 
+    });
+</script>
 </html>
