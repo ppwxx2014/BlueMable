@@ -430,7 +430,7 @@
 	    건물 여부
     */
     
-	function Taipei(){
+	function Taipei() {
     	const TAIPEI = 50000; //땅 가격
     	const HOTEL = 250000; //땅의 호텔 가격
     	const BUILDING = 150000; //땅의 빌딩 가격
@@ -499,7 +499,11 @@
     	8 : function(playerToken) {
     		// 해외유학
     		// 등록금 10만원을 은행에 납부합니다.
-    		subMoney(playerToken, 100000)
+    		subMoney(playerToken, 100000);
+    	},
+    	9 : function(playerToken) {
+    		// 노후연금을 받으세요 (5만원)
+    		addMoney(playerToken, 50000);
     	},
     	10 : function(playerToken) {
     		// 뒤로 3칸
@@ -515,23 +519,66 @@
     		player[token].location = 1;
     		addMoney(playerToken, 200000);
     	},
+    	12 : function(playerToken) {
+    		// 우승 
+    		// 자동차 경주에서 챔피언이 되었습니다(상금 : 100000)
+    		addMoney(playerToken, 100000);
+    	},
+    	13 : function() {
+    		// 우대권
+    	},
     	14 : function(playerToken) {
-				//상대방이 여객기를 가지고있을경우
-				if(/*상대방이 콩코드 여객기를 가지고 있을경우*/false) {
-					//내돈 - 300000
-					subMoney(playerToken, 300000);
-					    
-					//여객기를 가지고있는 상대의토큰 = ????
-					//콩코드여객기를 가지고있는 상대의돈 +300000
-	    	      	addMoney(상대토큰번호, 300000);
-					}
-				addMoney(playerToken, 200000); // 월급
-				player[playerToken].location = 2; // 타이베이로 이동
-				if(/*타이베이가 다른사람 땅일 경우*/false) {
-					// 땅 값 판매
-					subMoney(playerToken, 300000);
+			//상대방이 여객기를 가지고있을경우
+			if(/*상대방이 콩코드 여객기를 가지고 있을경우*/false) {
+				//내돈 - 300000
+				subMoney(playerToken, 300000);
+				    
+				//여객기를 가지고있는 상대의토큰 = ????
+				//콩코드여객기를 가지고있는 상대의돈 +300000
+    	      	addMoney(상대토큰번호, 300000);
 				}
-			},
+			addMoney(playerToken, 200000); // 월급
+			player[playerToken].location = 2; // 타이베이로 이동
+			if(/*타이베이가 다른사람 땅일 경우*/false) {
+				// 땅 값 판매
+				subMoney(playerToken, 300000);
+			}
+		},
+		15 : function() {
+			// 건물 수리비
+			// 건물별 수리비 납부
+			// subMoney(playerToken, 호텔갯수*100000);
+			// subMoney(playerToken, 빌딩갯수*60000);
+			// subMoney(playerToken, 별장갯수*30000);
+		},
+		16 : function() {
+			
+		},
+		17 : function(playerToken) {
+			// 퀸 엘리자베스호를 타고 '베이징'으로 가세요
+			player[playerToken].location = 3;
+			// 퀸 엘리자베스호를 상대방이 가지고 있으면 25만원을 지불합니다.
+			// owner...
+			// 출발선 통과할 경우 월급 받습니다( 무조건 통과함 )
+			addMoney(playerToken, 200000);
+		},
+		18 : function(palyerToken) {
+			// 부산으로 가세요
+			// 부산을 상대방이 가지고 있으면 통행료 지불합니다. (60만원)
+			// 출발선 통과시 월급을 받습니다. (player.location == 36)
+			if(player[playerToken].location == 36) {
+				addMoney(palyerToken, 200000);
+				player[playerToken].location = 26;
+				// 부산을 상대방이 소유 했으면 if
+			}
+		},
+		19 : function() {
+			// 각 플레이어에게 3만원을 받습니다.
+		},
+		20 : function(playerToken) {
+			// 장학금 10만원
+			addMoney(playerToken, 100000)
+		},
     	21 : function(playerToken) {
     		// 종합소득세
     		// 각 건물별 세금 납부
@@ -539,13 +586,62 @@
 			// subMoney(playerToken, 빌딩갯수*100000);
 			// subMoney(playerToken, 별장갯수*30000);
 		},
-
     	22 : function(playerToken) {
     		// 30만원을 은행에서 받습니다.
     		addMoney(playerToken, 300000);
     	},
+    	23 : function() {
+    		// 서울로 가세요 location40
+    		// 서울을 상대방이 소유 했다면 -200만원
+    		player[playerToken].location = 40;
+    		// if
+    	},
+    	24 : function() {
+    		// 당신의 부동산 중에서 가장 비싼 곳을 반액에 파세요
+    		// 건물이 있다면 건물도 반액으로 판매
+    		// 관광지 x
+    	},
+    	25 : function(playerToken) {
+    		// 우주여행 초청장
+    		if(player[playerToken] == 36) {
+    			addMoney(playerToken, 200000);
+    			player[playerToken] = 31;
+    		} else {
+    			player[playerToken] = 31;
+    		}
+    		// 다음턴에 우주여행이 되야함
+    	},
+    	26 : function() {
+    		// 우대권 (1회 사용 후 소멸)
+    		player[playerToken].inventory = "exemp";
+    	},
+    	27 : function() {
+    		// 세계 일주 초대권
+    		// 한바퀴 돌고 제자리
+    		// 사회복지지금을 지나가면 모아놓은 기부금 받음 location == 39
+    	},
+    	28 : function() {
+    		// 뒤로 2칸
+    		if(player[playerToken].location == 3) {
+    			addMoney(playerToken, 200000);
+    		} else {
+    			movePlayer(playerToken, -2);
+    		}
+    		// if(player[playerToken].location == 13)==> 무인도로감
+    	},
+    	29 : function() {
+    		// 사회복지지금 접수처로 가세요
+    		if(player[playerToken].location == 23 || player[playerToken].location == 36) {
+    			addMoney(playerToken, 200000); // 월급
+    			subMoney(playerToken, 150000); // 사회복지기금에 15만원 기부
+    		}
+    	},
    		30 : function() {
-   			//
+   			// 반액대매출
+   			// 당신의 부동산 중에서 가장 비싼 곳을 반액에 파세요
+    		// 건물이 있다면 건물도 반액으로 판매
+    		// 관광지 x
+   			
    		}
     	
     }
@@ -595,7 +691,7 @@
 	$(document).ready(function() {
         showDisplay();
         $("#throwDice").click(function() {
-            movePlayer(playerToken, 11);
+            movePlayer(playerToken, 3);
             //map[player1.location];
             showDisplay();
             changeTurn(true);
