@@ -332,11 +332,11 @@
                      </td>
                      <td width="89px" class = "no_border">
                      <div class = owner>0</div>
-                        2<span id="b2"></span>
+                        <span id="b2"></span>
                      </td>
                      <td class = "no_border board_edge">
                      <div class = owner>0</div>
-                        1<span id="b1" ></span>
+                        <span id="b1" >출발</span>
                         <span id="b1">   
 							<button class="btn-danger" id ="player1">aa</button>
 							<button class="btn-primary" id ="player2">bb</button>
@@ -351,12 +351,13 @@
       </div>
    </div>
 </body>
-
+<script src = "/blueMarble/land/land.js"></script>
 <script>
 	
 	var totalPlayer = 4; // 게임할 플레이어 수
     var playerToken = 1; // 턴 확인
     var Welfare = 0 // 복지기금
+    var totalSite = 39; // 출발선을 제외한 총 부동산 부지 갯수
     
 	function Players() {
         this.money = 2930000; // 플레이어 자금
@@ -365,8 +366,8 @@
         this.LoansValues = 0; // 대출금(rush&cash)
         this.muindo = 0; // 무인도일 경우 
         this.inventory = "none"; // 사용할수있는 황금카드 소유여부 = 미보유 :(none)  우대(exemp), 무인도탈출(escape)
-    	
 	};
+	
 	
     /*
     let player = {
@@ -405,6 +406,28 @@
     };
     */
 	
+    let landList = new Array();
+	for(let i = 1; i<39; i++) {
+		landList[i] = i;
+	}
+	console.log(landList.length);
+    
+	
+	// 부동산 부지 리스트
+	var siteList = [
+		"Taipei", "GoldKey", "Beijing", "Manila", "Jeju", "Singapore", "GoldKey", "Cairo", "Istanbul", "muindo",
+		"Athens", "GoldKey", "Copenhagen", "Stockholm ", "Concord", "Bern", "GoldKey", "Berlin", "Otawa", "donation",
+		"Congo", "GoldKey", "SaoPaulo", "Sydney", "Busan", "Hawaii", "Lisbon", "QueenShip", "Madrid", "SpaceStation",
+		"Tokyo", "SpaceShip", "Paris", "Rome", "GoldKey", "London", "NewYork", "Lotto", "Seoul", "StartLine"
+	]
+	
+	// 부지 리스트 저장
+	for(let i = 0; i < siteList; i++) {
+		siteList[i] = City[i];
+	}
+	
+	
+	
     var player = new Array();
     for(i=1; i<=totalPlayer; i++){ //플레이어 객체생성
         player[i] = new Players();
@@ -414,8 +437,8 @@
         let moveCoord = player[token].location;
 		if(player[token].muindo==0){
             moveCoord += diceNum;
-            if(moveCoord>40){
-			    moveCoord-=40;
+            if(moveCoord > 40){
+			    moveCoord -= 40;
 		    }
         }
         player[token].location = moveCoord;
@@ -456,33 +479,9 @@
 	    건물 여부
     */
     
-	function Taipei() {
-    	const TAIPEI = 50000; //땅 가격
-    	const HOTEL = 250000; //땅의 호텔 가격
-    	const BUILDING = 150000; //땅의 빌딩 가격
-    	const VILLA1 = 50000; //땅의 빌라 가격
-    	const VILLA2 = 50000; //땅의 빌라 가격
-    	//let owner = 0; //소유한 플레이어 외부정의 해야함
-    	let fee = 4000; //통행료
-    	let isHotel = false;
-    	let isBuliding = false;
-    	let isVilla1 = false;
-    	let isVilla2 = false;
-    	if(isHotel || isBuliding || isVilla1 || isVilla2)
-    		fee=0;
-    	if(isHotel)
-    		fee+=HOTEL;
-    	if(isBuliding)
-    		fee+=BUILDING;
-    	if(isVilla1)
-    		fee+=VILLA1;
-    	if(isVilla2)
-    		fee+=VILLA2;
-    	return fee;
-    	//addMoney((소유자), fee);
-    	//subMoney(totalPlayer, fee);
-    }
+	
   
+    
     //황금카드 함수 30개
     let goldKey = {
    		1 : function(playerToken) {
@@ -690,6 +689,7 @@
 	let shuffleArr = shuffle(goldKeyList);
 	console.log(shuffleArr)
 
+	
     function drowKey(){// 카드 뽑을때
     	var cardIndex = 0;
     	goldKey[goldKeyList[cardIndex]];
@@ -723,6 +723,10 @@
 	};
 	
 	$(document).ready(function() {
+		$("#b1").hide();
+		
+		
+		
 		$("#throwDice").click(function() {
 			$("#startDice").hide();
 		    
@@ -762,10 +766,6 @@
 		   
 		    let afterId = "#b" + player[playerToken].location;
 
-		    // 땅 밟았을떄 이벤트 발생
-		    if($(afterId).find(".player").text() == 0) {
-		    	landEvent(); 
-		    } 
 		    
 			// 말 출현
 			if(playerToken==1) {
@@ -781,7 +781,23 @@
 	        	  $(afterId).append("<button class='btn-warning' id ='player4'>dd</button>");
 	          }
 
+		    // 땅 밟았을떄 이벤트 발생
+		    for(let i = 1; i < 41; i++) {
+		    	if(player[playerToken].location == i) {
+		    		if($(afterId).find(".player").text() == 0) { 
+						// 빈땅일떄 건물 구입 팝업창
+						
+				    } else {
+				    	// 상대방 땅일 경우
+				    	
+				    	
+				    }
+		    		
+		    	}	
+		    }
 		    
+		    /* 
+		     */
 		    changeTurn(!(diceOne==diceTwo));//더블이 아닐때 턴넘김
 		    
 		    $("#dice").text(diceNum);
