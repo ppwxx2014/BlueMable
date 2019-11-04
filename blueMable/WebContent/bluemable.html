@@ -9,7 +9,7 @@
 <!-- jQuery library -->
 <style>
 .marble_board {
-   background-image: url("./images/board4.jpg");
+   background-image: url("./images/boardFinal.jpg");
    background-repeat: no-repeat;
    background-position: center top;
    background-size: 100%;
@@ -19,6 +19,11 @@
    border: none !important;
    
 }
+.no_border:hover {
+	box-shadow: 0px 0px 25px rgba(0, 0, 0, 0.6);
+	background: rgba(0, 130, 150, 0.2);
+	border-radius: 15px;
+}
 .td_width {
 	width: 90px;
 }
@@ -27,8 +32,48 @@
    background: lightblue;
 }
 .board_edge {
-	width: 140px;
-	height: 145px;
+	width: 145px;
+}
+ #playerOne {
+	background: #fff;
+      border: 6px solid #ccc;
+      height: 100px;
+      margin: 20px;
+      padding: 20px;
+      width: 100px;
+      float: left;
+      margin-left: 300px;
+      po
+}
+#playerTwo {
+	background: #fff;
+      border: 6px solid #ccc;
+      height: 100px;
+      margin: 20px;
+      padding: 20px;
+      width: 100px;
+      float: right;
+      margin-right: 300px;
+}
+#playerThree {
+	background: #fff;
+      border: 6px solid #ccc;
+      height: 100px;
+      margin: 20px;
+      padding: 20px;
+      width: 100px;
+      float: left;
+      margin-left: 300px;
+}
+#playerFour {
+	background: #fff;
+      border: 6px solid #ccc;
+      height: 100px;
+      margin: 20px;
+      padding: 20px;
+      width: 100px;
+      float: right;
+      margin-right: 300px;
 }
 </style>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
@@ -36,11 +81,14 @@
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 </head>
 <body>
+<!-- <div id = "playerOne">One</div>
+<div id = "playerTwo">Two</div> -->
+
    <div class="boaard_floor">
 
       <div class="container" align="center">
 
-         <h5>
+         <!-- <h5>
 			이동 지점 : <input id="point" type="text" />
          </h5>
 		<div>
@@ -69,14 +117,15 @@
 	    </div>
 		<div>
 			<button id="throwDice">주사위 굴리기</button>
-		</div>
+		</div> -->
 	
-	
+		<h3>부루마블</h3>
+		
          <div class="marble_board" align="center">
             <div
-               style="padding-left: 14px; padding-right: 18px; padding-top: 14px; height: 1145px">
+               style="padding-left: 30px; padding-right: 18px; padding-top: 26px; height: 1145px; size: 75%;">
                <table class="table">
-                  <tr height="148px">
+                  <tr height="143px">
                      <td class = "no_border board_edge">
                      	<div class = owner>0</div>
                         21<span id="b21"></span>
@@ -101,19 +150,19 @@
                      <div class = owner>0</div>
                         26<span id="b26"></span>
                      </td>
-                     <td class = "no_border td_width">
+                     <td class = "no_border" style = "width: 88px;">
                      <div class = owner>0</div>
                         27<span id="b27"></span>
                      </td>
-                     <td class = "no_border td_width">
+                     <td class = "no_border" style = "width: 85px; padding-right: none;">
                      <div class = owner>0</div>
                         28<span id="b28"></span>
                      </td>
-                     <td class = "no_border td_width">
+                     <td class = "no_border" style = "width: 85px;">
                      <div class = owner>0</div>
                         29<span id="b29"></span>
                      </td>
-                     <td class = "no_border td_width">
+                     <td class = "no_border" style = "width: 85px;">
                      <div class = owner>0</div>
                         30<span id="b30"></span>
                      </td>
@@ -122,179 +171,122 @@
                         31<span id="b31"></span>
                      </td>
                   </tr>
-                  <tr height="91px">
+                  
+                  <tr height="88px">
                      <td class = "no_border">
                      <div class = owner>0</div>
                         20<span id="b20"></span>
                      </td>
-                     <td class="no_border"></td>
-                     <td class="no_border"></td>
-                     <td class="no_border"></td>
-                     <td class="no_border"></td>
-                     <td class="no_border"></td>
-                     <td class="no_border"></td>
-                     <td class="no_border"></td>
-                     <td class="no_border"></td>
-                     <td class="no_border"></td>
+                     <!-- 가운데 창 -->
+                     <td class="no_border" colspan="9" rowspan="9">
+                     	<!-- <button type = "button" id = "two">2인</button>
+                     	<button type = "button"  id = "three">3인</button>
+                     	<button type = "button"  id = "four">4인</button> -->
+                     </td>
                      <td class = "no_border">
                      <div class = owner>0</div>
                         32<span id="b32"></span>
                      </td>
                   </tr>
-                  <tr height="90px">
+                  
+                  <tr height="88px">
                      <td class = "no_border">
                      <div class = owner>0</div>
                         19<span id="b19"></span>
                      </td>
-                     <td class="no_border"></td>
-                     <td class="no_border"></td>
-                     <td class="no_border"></td>
-                     <td class="no_border"></td>
-                     <td class="no_border"></td>
-                     <td class="no_border"></td>
-                     <td class="no_border"></td>
-                     <td class="no_border"></td>
-                     <td class="no_border"></td>
+                     
                      <td class = "no_border">
                      <div class = owner>0</div>
                         33<span id="b33"></span>
-                     </td>
+                     </td>              
                   </tr>
-                  <tr height="90px">
+                  
+                  <tr height="88px">
                      <td class = "no_border">
                      <div class = owner>0</div>
                         18<span id="b18"></span>
                      </td>
-                     <td class="no_border"></td>
-                     <td class="no_border"></td>
-                     <td class="no_border"></td>
-                     <td class="no_border"></td>
-                     <td class="no_border"></td>
-                     <td class="no_border"></td>
-                     <td class="no_border"></td>
-                     <td class="no_border"></td>
-                     <td class="no_border"></td>
+                     
                      <td class = "no_border">
                      <div class = owner>0</div>
                         34<span id="b34"></span>
                      </td>
                   </tr>
-                  <tr height="90px">
+                  
+                  <tr height="88px">
                      <td class = "no_border">
                      <div class = owner>0</div>
                         17<span id="b17"></span>
                      </td>
-                     <td class="no_border"></td>
-                     <td class="no_border"></td>
-                     <td class="no_border"></td>
-                     <td class="no_border"></td>
-                     <td class="no_border"></td>
-                     <td class="no_border"></td>
-                     <td class="no_border"></td>
-                     <td class="no_border"></td>
-                     <td class="no_border"></td>
+                     
                      <td class = "no_border">
                      <div class = owner>0</div>
                      35<span id="b35"></span>
                      </td>
                   </tr>
-                  <tr height="90px">
+                  
+                  <tr height="88px">
                      <td class = "no_border">
                      <div class = owner>0</div>
                         16<span id="b16"></span>
                      </td>
-                     <td class="no_border"></td>
-                     <td class="no_border"></td>
-                     <td class="no_border"></td>
-                     <td class="no_border"></td>
-                     <td class="no_border"></td>
-                     <td class="no_border"></td>
-                     <td class="no_border"></td>
-                     <td class="no_border"></td>
-                     <td class="no_border"></td>
+                     
                      <td class = "no_border">
                      <div class = owner>0</div>
                      36<span id="b36"></span>
                      </td>
                   </tr>
-                  <tr height="90px">
+                  
+                  <tr height="88px">
                      <td class = "no_border">
                      <div class = owner>0</div>
                         15<span id="b15"></span>
                      </td>
-                     <td class="no_border"></td>
-                     <td class="no_border"></td>
-                     <td class="no_border"></td>
-                     <td class="no_border"></td>
-                     <td class="no_border"></td>
-                     <td class="no_border"></td>
-                     <td class="no_border"></td>
-                     <td class="no_border"></td>
-                     <td class="no_border"></td>
+                     
                      <td class = "no_border">
                      <div class = owner>0</div>
                      37<span id="b37"></span>
                      </td>
                   </tr>
-                  <tr height="90px">
+                  
+                  <tr height="88px">
                      <td class = "no_border">
                      <div class = owner>0</div>
                         14<span id="b14"></span>
                      </td>
-                     <td class="no_border"></td>
-                     <td class="no_border"></td>
-                     <td class="no_border"></td>
-                     <td class="no_border"></td>
-                     <td class="no_border"></td>
-                     <td class="no_border"></td>
-                     <td class="no_border"></td>
-                     <td class="no_border"></td>
-                     <td class="no_border"></td>
+                     
                      <td class = "no_border">
                      <div class = owner>0</div>
                      38<span id="b38"></span>
                      </td>
                   </tr>
-                  <tr height="90px">
+                  
+                  <tr height="88px">
                      <td class = "no_border">
                      <div class = owner>0</div>
                         13<span id="b13"></span>
                      </td>
-                     <td class="no_border"></td>
-                     <td class="no_border"></td>
-                     <td class="no_border"></td>
-                     <td class="no_border"></td>
-                     <td class="no_border"></td>
-                     <td class="no_border"></td>
-                     <td class="no_border"></td>
-                     <td class="no_border"></td>
-                     <td class="no_border"></td>
+                     
                      <td class = "no_border">
                      <div class = owner>0</div>
                      39<span id="b39"></span>
                      </td>
                   </tr>
-                  <tr height="90px">
+                  
+                  <tr height="88px">
                      <td class = "no_border">
                      <div class = owner>0</div>
                         12<span id="b12"></span>
                      </td>
-                     <td class="no_border"></td>
-                     <td class="no_border"></td>
-                     <td class="no_border"></td>
-                     <td class="no_border"></td>
-                     <td class="no_border"></td>
-                     <td class="no_border"></td>
-                     <td class="no_border"></td>
-                     <td class="no_border"></td>
-                     <td class="no_border"></td>
+                     
                      <td class = "no_border">
                      <div class = owner>0</div>
                      40<span id="b40"></span>
                      </td>
                   </tr>
+                  
                   <tr height="148px">
-                     <td class = "no_border board_edge">
+                     <td class = "no_border">
                      <div class = owner>0</div>
                         11<span id="b11"></span>
                      </td>
@@ -334,7 +326,7 @@
                      <div class = owner>0</div>
                         <span id="b2"></span>
                      </td>
-                     <td class = "no_border board_edge">
+                     <td class = "no_border">
                      <div class = owner>0</div>
                         <span id="b1" >출발</span>
                         <span id="b1">   
@@ -350,6 +342,10 @@
          </div>
       </div>
    </div>
+		<!-- <div id = "playerThree">Three
+		</div>
+		<div id = "playerFour">Four
+		</div> -->
 </body>
 <script src = "/blueMarble/land/land.js"></script>
 <script>
@@ -724,6 +720,20 @@
 	
 	$(document).ready(function() {
 		$("#b1").hide();
+		console.log("totalPlayer : ", totalPlayer);
+		/* $("#two").click(function () {
+			totalPlayer = 2;
+			console.log("totalPlayer : ", totalPlayer);
+		});
+		$("#three").click(function () {
+			totalPlayer = 3;	
+			console.log("totalPlayer : ", totalPlayer);
+		});
+		$("#four").click(function () {
+			totalPlayer = 4;
+			console.log("totalPlayer : ", totalPlayer);
+		}); */
+		
 		
 		
 		
