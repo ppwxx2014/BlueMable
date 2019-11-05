@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<script type="text/javascript" src="/blueMarble/scripts/land.js" ></script>
+    <script src="/blueMarble/scripts/jquery-3.4.1.min.js"></script>
+    <script src="/blueMarble/popup/popup.js"></script>
+<link rel="stylesheet" type="text/css" href="/blueMarble/popup/popup.css">
+
+</head>
+
+<body>
+<div id ='popup'></div>
+<div style="height: 200px;"></div>
+<button id="taipei">타이페이(구입)</button>
+<button id="taipeiBuild">타이페이(건설)</button>
+<button id="loan">대출</button>
+<button id="sale">매각</button>
+<button id="taipeiInfo">타이페이(정보)</button>
+<button id="goldKey">골드 카드</button>
+<script type="text/javascript">
+//--------------------------------------------
+/* $('.btn-example').click(function(){
+	<a href="#layer2" class="btn-example">팝업레이어</a>
+    var $href = $(this).attr('href');
+    layer_popup($("#layer2"));
+}); */
+	$("#popup").load("/blueMarble/popup/popup.html");
+	let goldKey = {
+   		1:function(){//병원비 지급 : 벌금 50000원
+   			alert("1e");
+   		},
+    	2:function(){
+   			alert("2e");
+    	},
+   		//.....
+   		30: function(){
+   			alert("30e");
+   			//
+   		}
+    }
+	$("#taipei").click(function(){
+		//if(taipei.owner!=0){// 땅주인이 없으면
+		if(true){
+			//땅구매 팝업 표시
+			buy_popup($("#buyLandLayer"), "타이페이", "8");
+		}else{//주인 있으면
+			if(taipei.owner==playerToken){//자기땅이면
+				//건물 건설 팝업
+			}else{//남의 땅이면
+				//통행료 납부 함수 
+			}
+		}
+	});
+	$("#taipeiBuild").click(function(){
+		//if(taipei.owner!=0){// 땅주인이 없으면
+		if(true){
+			//땅구매 팝업 표시
+			build_popup($("#buildLayer"), "타이페이");
+		}else{//주인 있으면
+			//if(taipei.owner==playerToken){//자기땅이면
+			if(true){
+			}else{//남의 땅이면
+				//통행료 납부 함수 
+			}
+		}
+	});
+	$("#loan").click(function(){
+		//if(taipei.owner!=0){// 땅주인이 없으면
+		if(true){
+			//땅구매 팝업 표시
+			Loan_popup($("#loanLayer"));
+		}else{//주인 있으면
+			//if(taipei.owner==playerToken){//자기땅이면
+			if(true){
+			}else{//남의 땅이면
+				//통행료 납부 함수 
+			}
+		}
+	});
+	$("#sale").click(function(){
+		//if(taipei.owner!=0){// 땅주인이 없으면
+		if(true){
+			//땅구매 팝업 표시
+			Sale_popup($("#saleLayer"));
+		}else{//주인 있으면
+			//if(taipei.owner==playerToken){//자기땅이면
+			if(true){
+			}else{//남의 땅이면
+				//통행료 납부 함수 
+			}
+		}
+	});
+	$("#taipeiInfo").click(function(){
+		//if(taipei.owner!=0){// 땅주인이 없으면
+		if(true){
+			//땅구매 팝업 표시
+			Info_popup($("#informationLayer"), '타이페이');
+		}else{//주인 있으면
+			//if(taipei.owner==playerToken){//자기땅이면
+			if(true){
+			}else{//남의 땅이면
+				//통행료 납부 함수 
+			}
+		}
+	});
+	$("#goldKey").click(function(){
+		//if(taipei.owner!=0){// 땅주인이 없으면
+		if(true){
+			//땅구매 팝업 표시
+			Gold_popup($("#goldLayer"));
+		}else{//주인 있으면
+			//if(taipei.owner==playerToken){//자기땅이면
+			if(true){
+			}else{//남의 땅이면
+				//통행료 납부 함수 
+			}
+		}
+	});
+//카드 섞는다
+    let goldKeyList = [1,2,30];
+	var index = 0;
+    function drowKey(){// 카드 뽑을때
+    	goldKey[goldKeyList[index]]();
+    	index++;
+    }
+    function df(){
+    	console.log(land.print());
+    }
+    var taipei = {
+    		owner : 0,
+    	   	hotel : false,
+    	   	building : false,
+    	   	villa1 : false,
+    	   	villa2 : false,
+    	   	hotelValue : 450000,
+    	   	buildingValue : 180000,
+    	   	villaValue1 : 20000,
+    	   	villaValue2 : 40000,
+    	   	getFare: function(){
+    	   		let fare = 0;
+    	   		let count = 0;
+    	   		if(this.hotel){
+    	   			fare += this.hotelValue;
+    	   			count++;
+    	   		}
+    	   		if(this.building){
+    	   			fare += this.buildingValue;
+    	   			count++;
+    	   		}
+    	   		if(this.villa1){
+    	   			fare += this.villaValue1;
+    	   			count++;
+    	   		}
+    	   		if(this.villa2){
+    	   			fare += this.villaValue2;
+    	   			count++;
+    	   		}
+    	   		if(count==0){
+    	   			fare=4000
+    	   		}
+    	   		return fare;
+    	   	}
+    	}
+</script>
+</body>
+</html>

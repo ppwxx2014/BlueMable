@@ -34,56 +34,66 @@
 .board_edge {
 	width: 145px;
 }
- #playerOne {
-	background: #fff;
-      border: 6px solid #ccc;
-      height: 100px;
-      margin: 20px;
-      padding: 20px;
-      width: 100px;
-      float: left;
-      margin-left: 300px;
-      po
+.box_left{
+  width: 300px;
+  padding: 20px;
+  background: #191919;
+  text-align: center;
+  float: left;
+  margin-left: 150px;
+  border:0;
+  background: none;
+  display: block;
+  margin: 20px auto;
+  text-align: center;
+  border: 2px solid #2ecc71;
+  padding: 14px 40px;
+  outline: none;
+  color: black;
+  border-radius: 24px;
+  transition: 0.25s;
 }
-#playerTwo {
-	background: #fff;
-      border: 6px solid #ccc;
-      height: 100px;
-      margin: 20px;
-      padding: 20px;
-      width: 100px;
-      float: right;
-      margin-right: 300px;
+.box_right{
+  width: 300px;
+  padding: 20px;
+  background: #191919;
+  text-align: center;
+  float: right;
+  margin-right: 150px;
+  border:0;
+  background: none;
+  display: block;
+  margin: 20px auto;
+  text-align: center;
+  border: 2px solid #2ecc71;
+  padding: 14px 40px;
+  outline: none;
+  color: black;
+  border-radius: 24px;
+  transition: 0.25s;
 }
-#playerThree {
-	background: #fff;
-      border: 6px solid #ccc;
-      height: 100px;
-      margin: 20px;
-      padding: 20px;
-      width: 100px;
-      float: left;
-      margin-left: 300px;
-}
-#playerFour {
-	background: #fff;
-      border: 6px solid #ccc;
-      height: 100px;
-      margin: 20px;
-      padding: 20px;
-      width: 100px;
-      float: right;
-      margin-right: 300px;
+#main_td {
+	vertical-align:middle;
+	 text-align: center;
 }
 </style>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
 <!-- Latest compiled JavaScript -->
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 </head>
-<body>
-<!-- <div id = "playerOne">One</div>
-<div id = "playerTwo">Two</div> -->
-
+<body style = "background-color: gray;">
+	<div class = "box_left">
+		1p <span id="1Pmoney"></span>원
+		<br>
+		1p위치:<span id="1p"></span>
+	</div>
+	<div class = "box_right">
+		2p <span id="2Pmoney"></span>원
+		<br>
+		2p위치:<span id="2p"></span>
+	</div>
+<div></div>
+<br><br><br>
    <div class="boaard_floor">
 
       <div class="container" align="center">
@@ -91,17 +101,17 @@
          <!-- <h5>
 			이동 지점 : <input id="point" type="text" />
          </h5>
+       
 		<div>
-	        1p <span id="1Pmoney"></span>원
-	        2p <span id="2Pmoney"></span>원
-	        3p <span id="3Pmoney"></span>원
-	        4p <span id="4Pmoney"></span>원
+	        
+	        
+	        
 	    </div>
 		<p>    
-			1p위치:<span id="1p"></span>
+			
 		</p>
 		<p>
-			2p위치:<span id="2p"></span>
+			
 		</p>
 		<p>
 			3p위치:<span id="3p"></span>
@@ -116,11 +126,8 @@
         	주사위 결과 : <span id = "dice"></span>
 	    </div>
 		<div>
-			<button id="throwDice">주사위 굴리기</button>
+			
 		</div> -->
-	
-		<h3>부루마블</h3>
-		
          <div class="marble_board" align="center">
             <div
                style="padding-left: 30px; padding-right: 18px; padding-top: 26px; height: 1145px; size: 75%;">
@@ -172,16 +179,18 @@
                      </td>
                   </tr>
                   
-                  <tr height="88px">
+                  <tr height="90px">
                      <td class = "no_border">
                      <div class = owner>0</div>
                         20<span id="b20"></span>
                      </td>
                      <!-- 가운데 창 -->
-                     <td class="no_border" colspan="9" rowspan="9">
+                     <td id = "main_td" class="no_border" colspan="9" rowspan="9">
                      	<!-- <button type = "button" id = "two">2인</button>
                      	<button type = "button"  id = "three">3인</button>
                      	<button type = "button"  id = "four">4인</button> -->
+                     	
+                     	<button id="throwDice">주사위 굴리기</button>
                      </td>
                      <td class = "no_border">
                      <div class = owner>0</div>
@@ -342,10 +351,16 @@
          </div>
       </div>
    </div>
-		<!-- <div id = "playerThree">Three
-		</div>
-		<div id = "playerFour">Four
-		</div> -->
+	<div class = "box_left">
+		3p <span id="3Pmoney"></span>원
+		<br>
+		3p위치:<span id="3p"></span>
+	</div>
+	<div class = "box_right">
+		 4p <span id="4Pmoney"></span>원
+		 <br>
+		 4p위치:<span id="4p"></span>
+	</div>
 </body>
 <script src = "/blueMarble/land/land.js"></script>
 <script>
@@ -357,7 +372,7 @@
     
 	function Players() {
         this.money = 2930000; // 플레이어 자금
-        this.location = 1; // 플레이어 위치
+        this.location = 0; // 플레이어 위치
         this.isLoans = false; // 대출 여부
         this.LoansValues = 0; // 대출금(rush&cash)
         this.muindo = 0; // 무인도일 경우 
@@ -408,14 +423,17 @@
 	}
 	console.log(landList.length);
     
-	
-	// 부동산 부지 리스트
-	var siteList = [
+	let siteList = [
 		"Taipei", "GoldKey", "Beijing", "Manila", "Jeju", "Singapore", "GoldKey", "Cairo", "Istanbul", "muindo",
 		"Athens", "GoldKey", "Copenhagen", "Stockholm ", "Concord", "Bern", "GoldKey", "Berlin", "Otawa", "donation",
 		"Congo", "GoldKey", "SaoPaulo", "Sydney", "Busan", "Hawaii", "Lisbon", "QueenShip", "Madrid", "SpaceStation",
 		"Tokyo", "SpaceShip", "Paris", "Rome", "GoldKey", "London", "NewYork", "Lotto", "Seoul", "StartLine"
 	]
+	// 부동산 부지 리스트
+	
+	
+	
+	
 	
 	// 부지 리스트 저장
 	for(let i = 0; i < siteList; i++) {
@@ -475,8 +493,13 @@
 	    건물 여부
     */
     
-	
-  
+
+	let owner = [ // -1 황금열쇠 // -2 출발지(월급) // -3 이벤트땅
+		-2, 0, -1, 0, 0, 0, 0, -1, 0, 0,
+		-3, 0, -1, 0, 0, 0, 0, -1, 0, 0,
+		-3, 0, -1, 0, 0, 0, 0, 0, 0, 0,
+		-3, 0, 0, 0, 0, -1, 0, 0, -3, 0,
+		]
     
     //황금카드 함수 30개
     let goldKey = {
@@ -500,18 +523,18 @@
     	},
     	4 : function(playerToken) {
     		// 무인도로 갑니다
-    		player[playerToken].location = 11;
+    		player[playerToken].location = 10;
     	},
     	// 5번 장기자랑 
     	6 : function(playerToken) {
     		// 제주로 이동 시작지점 통과시 월급 부여
     		// 제주가 남에 땅이면 돈 지불
-    		if(player[playerToken].location = 3) {
-    			player[playerToken].location = 6;
+    		if(player[playerToken].location = 2) {
+    			player[playerToken].location = 5;
     			// 남 땅일 경우 돈 지불 
     		} else {
     			addMoney(playerToken, 200000);
-    			player[playerToken].location = 6;
+    			player[playerToken].location = 5;
     			// 남 땅일 경우 돈 지불
     		}
     	},
@@ -530,8 +553,8 @@
     	},
     	10 : function(playerToken) {
     		// 뒤로 3칸
-    		if(player[playerToken].location == 3) {
-    			player[playerToken].location = 40;
+    		if(player[playerToken].location == 2) {
+    			player[playerToken].location = 39;
     		} else {
     			movePlayer(playerToken, -3);
     		}
@@ -539,7 +562,7 @@
     	},
     	11 : function(playerToken) {
     		// 출발지로 돌아가고, 월급을 받습니다.
-    		player[token].location = 1;
+    		player[token].location = 0;
     		addMoney(playerToken, 200000); // 월급
     	},
     	12 : function(playerToken) {
@@ -562,7 +585,7 @@
     	      	addMoney(상대토큰번호, 300000);
 				}
 			addMoney(playerToken, 200000); // 월급
-			player[playerToken].location = 2; // 타이베이로 이동
+			player[playerToken].location = 1; // 타이베이로 이동
 			if(/*타이베이가 다른사람 땅일 경우*/false) {
 				// 땅 값 판매
 				subMoney(playerToken, 300000);
@@ -593,10 +616,10 @@
 		18 : function(palyerToken) {
 			// 부산으로 가세요
 			// 부산을 상대방이 가지고 있으면 통행료 지불합니다. (60만원)
-			// 출발선 통과시 월급을 받습니다. (player.location == 36)
-			if(player[playerToken].location == 36) {
+			// 출발선 통과시 월급을 받습니다. (player.location == 35)
+			if(player[playerToken].location == 35) {
 				addMoney(palyerToken, 200000);
-				player[playerToken].location = 26;
+				player[playerToken].location = 25;
 				// 부산을 상대방이 소유 했으면 if
 			}
 		},
@@ -619,9 +642,9 @@
     		addMoney(playerToken, 300000);
     	},
     	23 : function() {
-    		// 서울로 가세요 location40
+    		// 서울로 가세요 location39
     		// 서울을 상대방이 소유 했다면 -200만원
-    		player[playerToken].location = 40;
+    		player[playerToken].location = 39;
     		// if
     	},
     	24 : function() {
@@ -631,11 +654,11 @@
     	},
     	25 : function(playerToken) {
     		// 우주여행 초청장
-    		if(player[playerToken] == 36) {
+    		if(player[playerToken] == 35) {
     			addMoney(playerToken, 200000);
-    			player[playerToken] = 31;
+    			player[playerToken] = 30;
     		} else {
-    			player[playerToken] = 31;
+    			player[playerToken] = 30;
     		}
     		// 다음턴에 우주여행이 되야함
     	},
@@ -646,20 +669,20 @@
     	27 : function() {
     		// 세계 일주 초대권
     		// 한바퀴 돌고 제자리
-    		// 사회복지지금을 지나가면 모아놓은 기부금 받음 location == 39
+    		// 사회복지지금을 지나가면 모아놓은 기부금 받음 location == 38
     	},
     	28 : function() {
     		// 뒤로 2칸
-    		if(player[playerToken].location == 3) {
+    		if(player[playerToken].location == 2) {
     			addMoney(playerToken, 200000); // 월급
     		} else {
     			movePlayer(playerToken, -2);
     		}
-    		// if(player[playerToken].location == 13)==> 무인도로감
+    		// if(player[playerToken].location == 10)==> 무인도로감
     	},
     	29 : function() {
     		// 사회복지지금 접수처로 가세요
-    		if(player[playerToken].location == 23 || player[playerToken].location == 36) {
+    		if(player[playerToken].location == 22 || player[playerToken].location == 35) {
     			addMoney(playerToken, 200000); // 월급
     			subMoney(playerToken, 150000); // 사회복지기금에 15만원 기부
     			Welfare += 150000;
@@ -719,7 +742,7 @@
 	};
 	
 	$(document).ready(function() {
-		$("#b1").hide();
+		$("#popup").load("/blueMarble/popup/popup.html");
 		console.log("totalPlayer : ", totalPlayer);
 		/* $("#two").click(function () {
 			totalPlayer = 2;
@@ -739,7 +762,6 @@
 		
 		$("#throwDice").click(function() {
 			$("#startDice").hide();
-		    
 			let diceOne = 0;
 			let diceTwo = 0;
 			let diceNum = 0; // 주사위 두개 던져서 두개 합
@@ -775,7 +797,7 @@
 		    movePlayer(playerToken, diceNum);// 말을 이동시킵니다.
 		   
 		    let afterId = "#b" + player[playerToken].location;
-
+			
 		    
 			// 말 출현
 			if(playerToken==1) {
@@ -793,9 +815,10 @@
 
 		    // 땅 밟았을떄 이벤트 발생
 		    for(let i = 1; i < 41; i++) {
-		    	if(player[playerToken].location == i) {
+		    	if(player[playerToken].location == i ) {
 		    		if($(afterId).find(".player").text() == 0) { 
 						// 빈땅일떄 건물 구입 팝업창
+						$(".player").text() = playerToken;
 						
 				    } else {
 				    	// 상대방 땅일 경우
