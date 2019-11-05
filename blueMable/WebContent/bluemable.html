@@ -368,7 +368,7 @@
 	var totalPlayer = 4; // 게임할 플레이어 수
     var playerToken = 1; // 턴 확인
     var Welfare = 0 // 복지기금
-    var totalSite = 39; // 출발선을 제외한 총 부동산 부지 갯수
+    var totalSite = 40; // 부동산부지 총 갯수
     
 	function Players() {
         this.money = 2930000; // 플레이어 자금
@@ -417,28 +417,7 @@
     };
     */
 	
-    let landList = new Array();
-	for(let i = 1; i<39; i++) {
-		landList[i] = i;
-	}
-	console.log(landList.length);
     
-	let siteList = [
-		"Taipei", "GoldKey", "Beijing", "Manila", "Jeju", "Singapore", "GoldKey", "Cairo", "Istanbul", "muindo",
-		"Athens", "GoldKey", "Copenhagen", "Stockholm ", "Concord", "Bern", "GoldKey", "Berlin", "Otawa", "donation",
-		"Congo", "GoldKey", "SaoPaulo", "Sydney", "Busan", "Hawaii", "Lisbon", "QueenShip", "Madrid", "SpaceStation",
-		"Tokyo", "SpaceShip", "Paris", "Rome", "GoldKey", "London", "NewYork", "Lotto", "Seoul", "StartLine"
-	]
-	// 부동산 부지 리스트
-	
-	
-	
-	
-	
-	// 부지 리스트 저장
-	for(let i = 0; i < siteList; i++) {
-		siteList[i] = City[i];
-	}
 	
 	
 	
@@ -459,8 +438,9 @@
 	};
 	
 	// 땅 이동시 이벤트
-	var landEvent = function() {
+	var landEvent = function(token) {
 		// 땅에 도착했을 시 땅 주인 검사
+		
 		alert("test!")
 		
 	}
@@ -493,7 +473,26 @@
 	    건물 여부
     */
     
-
+	
+    
+	// 부동산 부지 리스트
+	var site = new Array();
+	function gameSet() {
+		let list = [
+			"StartLine", "Taipei", "GoldKey", "Beijing", "Manila", "Jeju", "Singapore", "GoldKey", "Cairo", "Istanbul",
+			"muindo", "Athens", "GoldKey", "Copenhagen", "Stockholm ", "Concord", "Bern", "GoldKey", "Berlin", "Ottawa",
+			"donation", "Congo", "GoldKey", "SaoPaulo", "Sydney", "Busan", "Hawaii", "Lisbon", "QueenShip", "Madrid",
+			"SpaceStation", "Tokyo", "SpaceShip", "Paris", "Rome", "GoldKey", "London", "NewYork", "Lotto", "Seoul"
+		]
+		
+		for(let i = 0; i < list.length; i++) {
+			site[i+1] = list[i];
+			console.log("도시 리스트 초기화", site[i]);
+		}
+		return site;
+    }
+	
+    
 	let owner = [ // -1 황금열쇠 // -2 출발지(월급) // -3 이벤트땅
 		-2, 0, -1, 0, 0, 0, 0, -1, 0, 0,
 		-3, 0, -1, 0, 0, 0, 0, -1, 0, 0,
@@ -758,7 +757,8 @@
 		}); */
 		
 		
-		
+		gameSet();
+		console.log(site.length);
 		
 		$("#throwDice").click(function() {
 			$("#startDice").hide();
@@ -796,7 +796,7 @@
 		    
 		    movePlayer(playerToken, diceNum);// 말을 이동시킵니다.
 		   
-		    let afterId = "#b" + player[playerToken].location;
+		    var afterId = "#b" + player[playerToken].location;
 			
 		    
 			// 말 출현
@@ -814,18 +814,12 @@
 	          }
 
 		    // 땅 밟았을떄 이벤트 발생
-		    for(let i = 1; i < 41; i++) {
+		    for(let i = 0; i < 40; i++) {
 		    	if(player[playerToken].location == i ) {
 		    		if($(afterId).find(".player").text() == 0) { 
 						// 빈땅일떄 건물 구입 팝업창
-						$(".player").text() = playerToken;
-						
-				    } else {
-				    	// 상대방 땅일 경우
-				    	
-				    	
-				    }
-		    		
+						console.log(site[i]);
+				    } 
 		    	}	
 		    }
 		    
