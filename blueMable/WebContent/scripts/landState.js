@@ -1,242 +1,243 @@
 let state = {
+		/* owner info
+		 * 0 건물 지을 수 있는 부지
+		 * -1 관광지
+		 * -2 황금열쇠
+		 * -3 무인도
+		 * -4 사회복지기금 센터
+		 * -5 우주여행
+		 * -6 로또
+		 * -7 출발선
+		*/
 		0 : {
-			owner : 0,
-			name: "startLine",
+			owner : -7,
+			name: "StartLine",
 			nameKr : "출발선",
 		},	
 		1 : {
-			owner : -1,
-			name : "taipei",
-			nameKr : "타이페이"
-			// 이벤트 땅
-		},
-		2 : {
 			owner : 0,
-			name: ,
-			nameKr : "",
-			fee : ,
+			name : "Taipei",
+			nameKr : "타이페이",
+			fee : 2000
+		},
+		2 : { // 황금열쇠
+			owner : -2,
+			name: "GoldKey",
+			nameKr : "황금열쇠",
+			
 		},
 		3 : {
-			owner : -1,
-			name: ,
-			nameKr : "",
-			fee : ,
+			owner : 0,
+			name: "Beijing",
+			nameKr : "베이징",
+			fee : 4000
 		},
 		4 : {
 			owner : 0,
-			name: ,
-			nameKr : "",
-			fee : ,
+			name: "Manila",
+			nameKr : "마닐라",
+			fee : 4000
 		},
-		5 : {
-			owner : 0,
-			name: ,
-			nameKr : "",
-			fee : ,
+		5 : { // 관광지
+			owner : -1,
+			name: "Jeju",
+			nameKr : "제주",
+			fee : 200000
 		},
 		6 : {
 			owner : 0,
-			name: ,
-			nameKr : "",
-			fee : ,
+			name: "Singapore",
+			nameKr : "싱가포르",
+			fee : 6000
 		},
-		7 : {
-			owner : 0,
-			name: ,
-			nameKr : "",
-			fee : ,
+		7 : { // 황금열쇠
+			owner : -2,
+			name: "GoldKey",
+			nameKr : "황금 열쇠",
 		},
 		8 : {
 			owner : 0,
-			name: ,
-			nameKr : "",
-			fee : ,
+			name: "Cairo",
+			nameKr : "카이로",
+			fee : 6000
 		},
 		9 : {
 			owner : 0,
-			name: ,
-			nameKr : "",
-			fee : ,
+			name: "Istanbul",
+			nameKr : "이스탄불",
+			fee : 8000
 		},
-		10 : {
-			owner : 0,
-			name: ,
-			nameKr : "",
-			fee : ,
+		10 : { // 무인도
+			owner : -3,
+			name: "muindo",
+			nameKr : "무인도",
 		},
 		11 : {
 			owner : 0,
-			name: ,
-			nameKr : "",
-			fee : ,
+			name: "Athenes",
+			nameKr : "아테네",
+			fee : 10000
 		},
-		12 : {
-			owner : 0,
-			name: ,
-			nameKr : "",
-			fee : ,
+		12 : { // 황금열쇠
+			owner : -2,
+			name: "GoldKey",
+			nameKr : "황금 열쇠",
 		},
-		13 : {
+		13 : { 
 			owner : 0,
-			name: ,
-			nameKr : "",
-			fee : ,
+			name: "Copenhagen",
+			nameKr : "코펜하겐",
+			fee : 12000
 		},
 		14 : {
 			owner : 0,
-			name: ,
-			nameKr : "",
-			fee : ,
+			name: "Stockholm",
+			nameKr : "스톡홀름",
+			fee : 12000
 		},
-		15 : {
-			owner : 0,
-			name: ,
-			nameKr : "",
-			fee : ,
+		15 : { // 관광지
+			owner : -1,
+			name: "Concord",
+			nameKr : "콩코드 여객기",
+			fee : 300000
 		},
 		16 : {
 			owner : 0,
-			name: ,
-			nameKr : "",
-			fee : ,
+			name: "Bern",
+			nameKr : "베른",
+			fee : 14000
 		},
 		17 : {
-			owner : 0,
-			name: ,
-			nameKr : "",
-			fee : ,
+			owner : -2,
+			name: "GoldKey",
+			nameKr : "황금 열쇠",
 		},
 		18 : {
 			owner : 0,
-			name: ,
-			nameKr : "",
-			fee : ,
+			name: "Berlin",
+			nameKr : "베를린",
+			fee : 14000,
 		},
 		19 : {
 			owner : 0,
-			name: ,
-			nameKr : "",
-			fee : ,
+			name: "Ottawa",
+			nameKr : "오타와",
+			fee : 16000
 		},
 		20 : {
-			owner : 0,
-			name: ,
-			nameKr : "",
-			fee : ,
+			owner : -4,
+			name: "donation",
+			nameKr : "사회복지기금센터"
 		},
 		21 : {
 			owner : 0,
-			name: ,
-			nameKr : "",
-			fee : ,
+			name: "Congo",
+			nameKr : "콩고",
+			fee : 18000
 		},
 		22 : {
-			owner : 0,
-			name: ,
-			nameKr : "",
-			fee : ,
+			owner : -2,
+			name: "GoldKey",
+			nameKr : "황금 열쇠",
 		},
 		23 : {
 			owner : 0,
-			name: ,
-			nameKr : "",
-			fee : ,
+			name: "SaoPaulo",
+			nameKr : "상파울로",
+			fee : 20000
 		},
 		24 : {
 			owner : 0,
-			name: ,
-			nameKr : "",
-			fee : ,
+			name: "Sydney",
+			nameKr : "시드니",
+			fee : 20000
 		},
-		25 : {
-			owner : 0,
-			name: ,
-			nameKr : "",
-			fee : ,
+		25 : { // 관광지
+			owner : -1,
+			name: "Busan",
+			nameKr : "부산",
+			fee : 600000
 		},
 		26 : {
 			owner : 0,
-			name: ,
-			nameKr : "",
-			fee : ,
+			name: "Hawaii",
+			nameKr : "하와이",
+			fee : 22000
 		},
 		27 : {
 			owner : 0,
-			name: ,
-			nameKr : "",
-			fee : ,
+			name: "Lisbon",
+			nameKr : "리스본",
+			fee : 22000
 		},
-		28 : {
-			owner : 0,
-			name: ,
-			nameKr : "",
-			fee : ,
+		28 : { // 관광지
+			owner : -1,
+			name: "QueenShip",
+			nameKr : "퀸엘리자베스호",
+			fee : 300000
 		},
 		29 : {
 			owner : 0,
-			name: ,
-			nameKr : "",
-			fee : ,
+			name: "Madrid",
+			nameKr : "마드리드",
+			fee : 24000
 		},
-		30 : {
-			owner : 0,
-			name: ,
-			nameKr : "",
-			fee : ,
+		30 : { // 우주여행
+			owner : -5,
+			name: "SpaceStation",
+			nameKr : "우주 여행",
 		},
 		31 : {
 			owner : 0,
-			name: ,
-			nameKr : "",
-			fee : ,
+			name: "Tokyo",
+			nameKr : "도쿄",
+			fee : 26000
 		},
-		32 : {
-			owner : 0,
-			name: ,
-			nameKr : "",
-			fee : ,
+		32 : { // 관광지
+			owner : -1,
+			name: "SpaceShip",
+			nameKr : "콜럼비아호",
+			fee : 450000
 		},
 		33 : {
 			owner : 0,
-			name: ,
-			nameKr : "",
-			fee : ,
+			name: "Paris",
+			nameKr : "파리",
+			fee : 28000
 		},
 		34 : {
 			owner : 0,
-			name: ,
-			nameKr : "",
-			fee : ,
+			name: "Rome",
+			nameKr : "로마",
+			fee : 28000
 		},
 		35 : {
-			owner : 0,
-			name: ,
-			nameKr : "",
-			fee : ,
+			owner : -2,
+			name: "GoldKey",
+			nameKr : "황금 열쇠"
 		},
 		36 : {
 			owner : 0,
-			name: ,
-			nameKr : "",
-			fee : ,
+			name: "London",
+			nameKr : "런던",
+			fee : 35000,
 		},
 		37 : {
 			owner : 0,
-			name: ,
-			nameKr : "",
-			fee : ,
+			name: "NewYork",
+			nameKr : "뉴욕",
+			fee : 35000,
 		},
 		38 : {
-			owner : 0,
-			name: ,
-			nameKr : "",
-			fee : ,
+			owner : -6,
+			name: "Lotto",
+			nameKr : "사회복지기금",
 		},
 		39 : {
-			owner : 0,
-			name: ,
-			nameKr : "",
-			fee : ,
+			owner : -1,
+			name: "Seoul",
+			nameKr : "서울",
+			fee : 1000000,
 		}
 		
 	}
