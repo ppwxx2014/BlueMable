@@ -9,8 +9,9 @@
 <!-- jQuery library -->
 
 <!-- 땅 정보 -->
+<script type="text/javascript" src="/blueMarble/scripts/landState.js"></script>
+<!-- 땅 값 반환 -->
 <script type="text/javascript" src="/blueMarble/scripts/land.js"></script>
-
 <!-- 팝업창 -->
 <script src="/blueMarble/popup/popup.js"></script>
 
@@ -364,11 +365,11 @@
         //칸 이동후 해당
 	];
 	var addMoney = function(token, money){//돈 추가 함수
-        player[token].money+=money;
+        player[token].money = player[token].money + money;
     }
     
     var subMoney = function(token, money){//돈 소비 함수 token:playerToken money
-        player[token].money+=money;
+        player[token].money = player[token].money - money;
     }
     
     /*
@@ -378,42 +379,6 @@
 	    건물 여부
     */
     
-	
-    
-	// 부동산 부지 리스트
-	var siteList = new Array();
-	function gameSet() {
-		let list = [
-			"StartLine", "Taipei", "GoldKey", "Beijing", "Manila",
-			"Jeju", "Singapore", "GoldKey", "Cairo", "Istanbul",
-			"muindo", "Athens", "GoldKey", "Copenhagen", "Stockholm ",
-			"Concord", "Bern", "GoldKey", "Berlin", "Ottawa",
-			"donation", "Congo", "GoldKey", "SaoPaulo", "Sydney",
-			"Busan", "Hawaii", "Lisbon", "QueenShip", "Madrid",
-			"SpaceStation", "Tokyo", "SpaceShip", "Paris", "Rome",
-			"GoldKey", "London", "NewYork", "Lotto", "Seoul"
-		]
-		
-		for(let i = 0; i < list.length; i++) {
-			siteList[i] = list[i];
-			console.log("도시 리스트 초기화", siteList[i]);
-		}
-		return siteList;
-    }
-	
-    
-	let owner = [ // -1 이벤트땅 // 빈땅
-		-1, 0, -1, 0, 0, 0, 0, -1, 0, 0,
-		-1, 0, -1, 0, 0, 0, 0, -1, 0, 0,
-		-1, 0, -1, 0, 0, 0, 0, 0, 0, 0,
-		-1, 0, 0, 0, 0, -1, 0, 0, -1, 0,
-		]
-    
-	
-	
-	
-	
-	
 	
 	// 부동산 가격 배열로
 	
@@ -663,6 +628,7 @@
 		$("#popup").load("/blueMarble/popup/popup.html");
 	$(document).ready(function() {
 		console.log("totalPlayer : ", totalPlayer);
+		showDisplay();
 		/* $("#two").click(function () {
 			totalPlayer = 2;
 			console.log("totalPlayer : ", totalPlayer);
@@ -677,11 +643,12 @@
 		}); */
 		
 		
-		gameSet();
-		console.log(siteList.length);
+	/* 	gameSet();
+		console.log(siteList.length); */
 		
 		$("#throwDice").click(function() {
 			$("#startDice").hide();
+			
 			let diceOne = 0;
 			let diceTwo = 0;
 			let diceNum = 0; // 주사위 두개 던져서 두개 합
@@ -714,7 +681,7 @@
 	          }
 
 		    
-		    movePlayer(playerToken, 7);// 말을 이동시킵니다.
+		    movePlayer(playerToken, 3);// 말을 이동시킵니다.
 		   
 		    var afterId = "#b" + (player[playerToken].location + 1);
 			
@@ -734,25 +701,49 @@
 	          }
 
 		    // 땅 밟았을떄 이벤트 발생
-		    for(let i = 0; i < 40; i++) {
+		    let loca = player[playerToken].location;
+		    console.log(state[loca].nameKr);
+		    
+		   /*  for(let i = 0; i < 40; i++) {
 		    	if(player[playerToken].location == i ) {
 						// 빈땅일떄 건물 구입 팝업창
 						// console.log(site[i+1]); 상대땅 지불 
-						console.log(siteList[i]);
+						console.log();
 						// state[player[playerToken].location].name 
-						buy_popup(siteList[i], 8);
+						buy_popup(siteList[i], );
 						// owner.[player[playerToken].location] = playerToken;
 		    		}
-		    	}	
+		    	}	 */
 		    
-		    /* 
-		     */
-		    changeTurn(!(diceOne==diceTwo)); //더블이 아닐때 턴넘김
+		    if(state[loca].owner >= 0){ //증서 땅일경우
+			  	if(state[loca].owner == 0){ // 땅주인이 없으면
+					//땅구매 팝업 표시
+				    buy_popup(playerToken, state[loca]);
+				    console.log(player[playerToken].money);
+				}else{ //주인 있으면
+					if(state[loca] == playerToken){ //자기땅이면
+						//건물 건설 팝업
+						build_popup(playerToken, siteList[loca]);
+					}else{ //남의 땅이면
+						//통행료 납부 함수 
+						console.log(player[playerToken].location);
+						let fare = site[player[playerToken].location + 1].getFare();
+						
+						subMoney(playerToken, fare);
+						// addMoney(owner[loca], fare);
+					}
+				}
+		    }else { //관광지, 골카, 사회기금, 우주여행, 무인도
+		    	Gold_popup();
+		    }
+		    
+		    changeTurn(!(diceOne == diceTwo)); //더블이 아닐때 턴넘김
 		    
 		    $("#dice").text(diceNum);
 		    $("#point").val = player[playerToken].location;
-		    showDisplay();
-		}); 
+		    
+		});
+		showDisplay();
     });
 </script>
 </html>
