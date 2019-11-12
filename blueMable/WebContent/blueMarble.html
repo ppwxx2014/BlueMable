@@ -264,7 +264,6 @@
 		 <br>
 		 4p위치:<span id="4p"></span>
 	</div>
-	
 </body>
 <script>
 	
@@ -370,6 +369,8 @@
     
     var subMoney = function(token, money){//돈 소비 함수 token:playerToken money
         player[token].money = player[token].money - money;
+        $(playerToken+"Pmoney").html(player[playerToken].money);
+    	showDisplay();
     }
     
     /*
@@ -646,6 +647,7 @@
 	/* 	gameSet();
 		console.log(siteList.length); */
 		
+		
 		$("#throwDice").click(function() {
 			$("#startDice").hide();
 			
@@ -724,12 +726,13 @@
 					if(state[loca] == playerToken){ //자기땅이면
 						//건물 건설 팝업
 						build_popup(playerToken, siteList[loca]);
-					}else{ //남의 땅이면
+					} else { //남의 땅이면
 						//통행료 납부 함수 
 						console.log(player[playerToken].location);
-						let fare = site[player[playerToken].location + 1].getFare();
-						
+						let fare = site[ player[playerToken].location + 1 ].getFare();
+							
 						subMoney(playerToken, fare);
+						
 						// addMoney(owner[loca], fare);
 					}
 				}
@@ -740,10 +743,11 @@
 		    changeTurn(!(diceOne == diceTwo)); //더블이 아닐때 턴넘김
 		    
 		    $("#dice").text(diceNum);
-		    $("#point").val = player[playerToken].location;
+		    // $("#point").val = player[playerToken].location;
 		    
 		});
 		showDisplay();
     });
+	
 </script>
 </html>
