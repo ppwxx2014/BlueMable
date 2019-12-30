@@ -266,8 +266,18 @@
 	</div>
 </body>
 <script>
+
+	let totalPlayer = 0;
+	let address  = unescape(location.href);
+	console.log(address.length)
+	console.log(parseInt(address.substring(56 , 57)));
 	
-	var totalPlayer = 4; // 게임할 플레이어 수
+	totalPlayer = parseInt(address.substring(56 , 57));
+	
+	console.log("totalPlayer : ", totalPlayer); 
+	
+	
+	//var totalPlayer = 4; // 게임할 플레이어 수
     var playerToken = 1; // 턴 확인
     var Welfare = 0 // 복지기금
     var totalSite = 40; // 부동산부지 총 갯수
@@ -600,7 +610,32 @@
     	cardIndex++;
     }
 	let showDisplay = function(){//표시갱신
-		$("#1p").html(player[1].location);//각 플레이어 위치 표시
+		console.log(totalPlayer);
+		if(totalPlayer == 2 ) {
+			$("#1p").html(player[1].location);//각 플레이어 위치 표시
+	        $("#2p").html(player[2].location);
+	        $("#1Pmoney").html(player[1].money);//각 플레이어 돈 표시
+	        $("#2Pmoney").html(player[2].money);
+		}
+		if(totalPlayer == 3 ) {
+			$("#1p").html(player[1].location);//각 플레이어 위치 표시
+	        $("#2p").html(player[2].location);
+	        $("#3p").html(player[3].location);
+	        $("#1Pmoney").html(player[1].money);//각 플레이어 돈 표시
+	        $("#2Pmoney").html(player[2].money);
+	        $("#3Pmoney").html(player[3].money);
+		}
+		if(totalPlayer == 4 ) {
+			$("#1p").html(player[1].location);//각 플레이어 위치 표시
+	        $("#2p").html(player[2].location);
+	        $("#3p").html(player[3].location);
+	        $("#4p").html(player[4].location);
+	        $("#1Pmoney").html(player[1].money);//각 플레이어 돈 표시
+	        $("#2Pmoney").html(player[2].money);
+	        $("#3Pmoney").html(player[3].money);
+	        $("#4Pmoney").html(player[4].money);
+		}
+		/* $("#1p").html(player[1].location);//각 플레이어 위치 표시
         $("#2p").html(player[2].location);
         $("#3p").html(player[3].location);
         $("#4p").html(player[4].location);
@@ -608,7 +643,7 @@
 		$("#1Pmoney").html(player[1].money);//각 플레이어 돈 표시
         $("#2Pmoney").html(player[2].money);
         $("#3Pmoney").html(player[3].money);
-        $("#4Pmoney").html(player[4].money);
+        $("#4Pmoney").html(player[4].money); */
         
         $("#turn").html(playerToken);//차례표시
         
@@ -626,10 +661,13 @@
         }
 	};
 	
+	
 		$("#popup").load("/blueMarble/popup/popup.html");
 	$(document).ready(function() {
-		console.log("totalPlayer : ", totalPlayer);
-		showDisplay();
+		
+		
+	      
+	      showDisplay();
 		/* $("#two").click(function () {
 			totalPlayer = 2;
 			console.log("totalPlayer : ", totalPlayer);
@@ -721,6 +759,7 @@
 			  	if(state[loca].owner == 0){ // 땅주인이 없으면
 					//땅구매 팝업 표시
 				    buy_popup(playerToken, state[loca]);
+			  		$(afterId).addClass("p1");
 				    console.log(player[playerToken].money);
 				}else{ //주인 있으면
 					if(state[loca] == playerToken){ //자기땅이면
@@ -733,7 +772,7 @@
 							
 						subMoney(playerToken, fare);
 						
-						// addMoney(owner[loca], fare);
+						addMoney(owner[loca], fare);
 					}
 				}
 		    }else { //관광지, 골카, 사회기금, 우주여행, 무인도
